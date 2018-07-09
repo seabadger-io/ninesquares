@@ -1,10 +1,13 @@
 # Ninesquares
+
 Yet Another Sudoku implementation
 
 ## About
+
 A Progressive Web Application which lets you place numbers on a 9x9 grid
 
 ## License
+
 Ninesquares - Yet Another Sudoku implementation
 Copyright (C) 2018 Gabor Szoboszlai
 
