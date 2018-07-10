@@ -1,14 +1,20 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.Header {
+  background-color: #2a728f;
+  color: #fff;
+  flex-basis: 100%;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
-.App-title {
-  font-size: 1.5em;
+.Main {
+  background-color: #fff;
+  color: #2a728f;
+  flex-basis: 100%;
+  padding: 15px;
+  box-sizing: border-box;
 }

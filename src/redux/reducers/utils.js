@@ -16,4 +16,5 @@ export const updateState = (state, update) => {
       newState[key] = update[key];
     }
   });
+  return newState;
 };

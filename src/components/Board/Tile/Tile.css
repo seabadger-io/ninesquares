@@ -1,0 +1,29 @@
+.Tile {
+  flex-basis: calc(100% / 9);
+  box-sizing: border-box;
+  border: 1px solid #000;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+}
+
+.Disabled {
+  background-color: #ccc;
+}
+
+.ActiveLine {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.Tile:nth-child(3n):not(:nth-child(9n)){
+  border-right: 3px solid #000;
+}
+
+.Tile:nth-child(n+19):nth-child(-n+27) {
+  border-bottom: 3px solid #000;
+}
+
+.Tile:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 3px solid #000;
+}

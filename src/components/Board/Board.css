@@ -1,0 +1,17 @@
+.GridRoot {
+  width: 100%;
+  max-width: 100vmin;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Board {
+  width: 100%;
+  min-width: 300px;
+  max-width: 800px;
+  display: flex;
+  flex-flow: row wrap;
+  border: 3px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+}
