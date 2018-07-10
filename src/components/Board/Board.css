@@ -1,6 +1,6 @@
 .GridRoot {
   width: 100%;
-  max-width: 100vmin;
+  max-width: calc(100vmin - 4rem);
   margin-left: auto;
   margin-right: auto;
 }

@@ -18,7 +18,7 @@ class Board extends Component {
         }
         if (ref.clientHeight !== width) {
           ref.style.height = width + 'px';
-          ref.style.fontSize = width * 0.9 + 'px';
+          ref.style.fontSize = Math.floor(width * 0.9) + 'px';
           ref.style.lineHeight = width + 'px';
         }
       }
