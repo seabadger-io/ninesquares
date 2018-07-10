@@ -9,7 +9,11 @@ const initialState = {
 let board = '';
 for (let i = 0; i < 9; i++) {
   for (let j = 0; j < 9; j++) {
-    board += i;
+    if (Math.random() > 0.8) {
+      board += Math.floor(Math.random() * 10);
+    } else {
+      board += 0;
+    }
   }
 }
 initialState.boards = [ board ];

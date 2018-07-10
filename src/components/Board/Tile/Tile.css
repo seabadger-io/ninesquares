@@ -10,6 +10,7 @@
 
 .Disabled {
   background-color: #ccc;
+  cursor: default;
 }
 
 .ActiveLine {

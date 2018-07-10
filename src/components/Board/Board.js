@@ -11,8 +11,8 @@ class Board extends Component {
   resizeTiles = () => {
     let width = null;
     Object.keys(this.tileRefs).forEach((idx) => {
-      if (typeof this.tileRefs[idx] !== 'undefined') {
-        const ref = this.tileRefs[idx].current;
+      if (this.tileRefs[idx] !== undefined) {
+        const ref = this.tileRefs[idx].tileRef.current;
         if (width === null) {
           width = ref.clientWidth;
         }
@@ -20,6 +20,28 @@ class Board extends Component {
           ref.style.height = width + 'px';
           ref.style.fontSize = width * 0.9 + 'px';
           ref.style.lineHeight = width + 'px';
+        }
+      }
+    });
+  }
+
+  onFocusLeftBoard = () => {
+    Object.keys(this.tileRefs).forEach((idx) => {
+      if (this.tileRefs[idx] !== undefined) {
+        this.tileRefs[idx].setActiveLine(false);
+      }
+    })
+  }
+
+  onTileFocus = (activeIdx) => {
+    Object.keys(this.tileRefs).forEach((idx) => {
+      if (this.tileRefs[idx] !== undefined) {
+        const ref = this.tileRefs[idx];
+        if (Math.floor(idx / 9) === Math.floor(activeIdx / 9) ||
+        idx % 9 === activeIdx % 9) {
+          ref.setActiveLine(true);
+        } else {
+          ref.setActiveLine(false);
         }
       }
     });
@@ -48,12 +70,17 @@ class Board extends Component {
       this.props.boards[this.props.activeBoard]) {
       const boardArray = this.props.boards[this.props.activeBoard].split('');
       board = (
-        <div className={classes.Board}>
+        <div
+          className={classes.Board}
+          onBlur={this.onFocusLeftBoard}
+        >
           {boardArray.map((tile, idx) => {
             const newTile = <Tile
               key={idx}
-              value={tile}
+              value={tile > 0 ? tile : ' '}
+              isFixed={tile !== '0'}
               getRef={ref => this.tileRefs[idx] = ref}
+              onFocus={() => { this.onTileFocus(idx); }}
             />
             return newTile;
           })}

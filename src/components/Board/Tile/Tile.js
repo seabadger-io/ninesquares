@@ -6,37 +6,37 @@ class Tile extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isActiveLine: false
+    }
     this.tileRef = React.createRef();
   }
 
   componentDidMount() {
-    this.props.getRef(this.tileRef);
+    this.props.getRef(this);
   }
 
   componentWillUnmount() {
     this.props.getRef(undefined);
   }
 
-  onResize = () => {
-    const currentNode = this.tileRef.current;
-    if (currentNode.clientHeight !== currentNode.clientWidth) {
-      currentNode.style.height = currentNode.clientWidth + 'px';
-      currentNode.style.fontSize = currentNode.clientWidth + 'px';
-      currentNode.style.lineHeight = currentNode.clientWidth + 'px';
-    }
+  setActiveLine(isActive) {
+    this.setState({ isActiveLine: isActive });
   }
 
   render(){
     const activeClasses = [classes.Tile];
     if (this.props.isFixed) {
       activeClasses.push(classes.Disabled);
-    } else if (this.props.isActiveLine) {
+    } else if (this.state.isActiveLine) {
       activeClasses.push(classes.ActiveLine);
     }
     return (
       <button
         ref={this.tileRef}
-        className={activeClasses}
+        className={activeClasses.join(' ')}
+        disabled={this.props.isFixed}
+        onFocus={this.props.onFocus ? this.props.onFocus : () => {}}
       >
         {this.props.value}
       </button>
