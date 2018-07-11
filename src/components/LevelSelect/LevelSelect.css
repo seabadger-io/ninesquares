@@ -1,0 +1,32 @@
+.LevelSelect {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 660px;
+  min-width: 200px;
+  margin: auto;
+}
+
+.LevelSelect button {
+  flex-basis: 100%;
+  color: #fff;
+  background-color: #2a728f;
+  font-size: 1.4rem;
+  padding: 15px 5px;
+  margin: 10px;
+  box-sizing: border-box;
+  transition: all 0.2s linear;
+}
+
+.LevelSelect button:focus {
+  outline: none;
+  color: #2a728f;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+@media (min-width: 500px) {
+  .LevelSelect button {
+    flex-basis: calc(50% - 20px);
+  }
+}

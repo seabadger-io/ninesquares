@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Board from './components/Board/Board';
+import LevelSelect from './components/LevelSelect/LevelSelect';
 
 class App extends Component {
   render() {
@@ -10,7 +11,7 @@ class App extends Component {
           <h1>Ninesquares</h1>
         </header>
         <main className={classes.Main}>
-          <Board />
+          <LevelSelect />
         </main>
       </div>
     );
