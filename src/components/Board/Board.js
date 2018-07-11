@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-import * as actions from '../../redux/actions/board';
 import Tile from './Tile/Tile';
 import classes from './Board.css';
 
@@ -59,16 +57,15 @@ class Board extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.activeBoard !== this.props.activeBoard) {
+    if (prevProps.puzzle !== this.props.puzzle) {
       this.resizeTiles();
     }
   }
 
   render() {
     let board = null;
-    if (this.props.activeBoard !== null &&
-      this.props.boards[this.props.activeBoard]) {
-      const boardArray = this.props.boards[this.props.activeBoard].split('');
+    if (this.props.puzzle !== null) {
+      const boardArray = this.props.puzzle.split('');
       board = (
         <div
           className={classes.Board}
@@ -90,23 +87,9 @@ class Board extends Component {
     return (
       <div className={classes.GridRoot}>
         {board}
-        <button onClick={this.props.testGrid}>Test grid</button>
       </div>
     );
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    testGrid: () => dispatch(actions.setActiveBoard(0))
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    activeBoard: state.board.activeBoard,
-    boards: state.board.boards
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default Board;
