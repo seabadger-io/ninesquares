@@ -3,20 +3,9 @@ import { updateState } from './utils';
 
 const initialState = {
   activeBoard: null,
+  lastActiveBoard: null,
   boards: null
 };
-
-let board = '';
-for (let i = 0; i < 9; i++) {
-  for (let j = 0; j < 9; j++) {
-    if (Math.random() > 0.8) {
-      board += Math.floor(Math.random() * 10);
-    } else {
-      board += 0;
-    }
-  }
-}
-initialState.boards = [ board ];
 
 export default (state = initialState, action) => {
   switch(action.type) {
@@ -25,8 +14,10 @@ export default (state = initialState, action) => {
         boards: action.boards
       });
     case actionsDef.SET_ACTIVE_BOARD:
+      const updateLast = action.activeBoard === null ? {} : { lastActiveBoard: action.activeBoard };
       return updateState(state, {
-        activeBoard: action.activeBoard
+        activeBoard: action.activeBoard,
+        ...updateLast
       });
     default:
       return state;
