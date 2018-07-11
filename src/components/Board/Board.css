@@ -19,4 +19,5 @@
 
 .Board.Preview {
   min-width: 100px;
+  border: 5px ridge #2a728f;
 }
