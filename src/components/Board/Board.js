@@ -54,6 +54,7 @@ class Board extends Component {
     this.resizeListener = window.addEventListener('resize', () => {
       this.resizeTiles();
     });
+    this.resizeTiles();
   }
 
   componentDidUpdate(prevProps) {
@@ -64,11 +65,15 @@ class Board extends Component {
 
   render() {
     let board = null;
+    const activeClasses = [ classes.Board ];
+    if (this.props.preview) {
+      activeClasses.push(classes.Preview);
+    }
     if (this.props.puzzle !== null) {
       const boardArray = this.props.puzzle.split('');
       board = (
         <div
-          className={classes.Board}
+          className={activeClasses.join(' ')}
           onBlur={this.onFocusLeftBoard}
         >
           {boardArray.map((tile, idx) => {
@@ -78,6 +83,7 @@ class Board extends Component {
               isFixed={tile !== '0'}
               getRef={ref => this.tileRefs[idx] = ref}
               onFocus={() => { this.onTileFocus(idx); }}
+              preview={this.props.preview}
             />
             return newTile;
           })}

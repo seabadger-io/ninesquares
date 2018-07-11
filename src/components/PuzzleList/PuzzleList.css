@@ -1,0 +1,33 @@
+.PuzzleList h2 {
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px #2a728f;
+}
+
+.Puzzles {
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.Puzzle {
+  text-decoration: none;
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px #2a728f;
+  color: #2a728f;
+  background-color: #fff;
+}
+
+.Puzzle .Preview {
+  width: 150px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.Puzzle .Details {
+  display: inline-block;
+}

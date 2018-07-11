@@ -1,3 +1,5 @@
 /* Puzzle actions */
-export const LOAD_PUZZLES = 'LOAD_PUZZLES';
 export const SET_ACTIVE_PUZZLE = 'SET_ACTIVE_PUZZLE';
+export const PUZZLES_LOADING = 'PUZZLES_LOADING';
+export const PUZZLES_LOADED = 'PUZZLES_LOADED';
+export const PUZZLES_LOAD_FAILED = 'PUZZLES_LOAD_FAILED';

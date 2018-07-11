@@ -1,0 +1,3 @@
+export {
+  loadPuzzles
+} from './puzzle';

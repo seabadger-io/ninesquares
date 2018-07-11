@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import classes from './App.css';
+import { Route, Switch } from 'react-router-dom';
 import Board from './components/Board/Board';
 import LevelSelect from './components/LevelSelect/LevelSelect';
+import PuzzleList from './components/PuzzleList/PuzzleList';
 
 class App extends Component {
   render() {
@@ -11,7 +13,10 @@ class App extends Component {
           <h1>Ninesquares</h1>
         </header>
         <main className={classes.Main}>
-          <LevelSelect />
+          <Switch>
+            <Route path='/' exact component={LevelSelect} />
+            <Route path='/list/:level' component={PuzzleList} />
+          </Switch>
         </main>
       </div>
     );

@@ -31,11 +31,14 @@ class Tile extends Component {
     } else if (this.state.isActiveLine) {
       activeClasses.push(classes.ActiveLine);
     }
+    if (this.props.preview) {
+      activeClasses.push(classes.Preview);
+    }
     return (
       <button
         ref={this.tileRef}
         className={activeClasses.join(' ')}
-        disabled={this.props.isFixed}
+        disabled={this.props.isFixed || this.props.preview}
         onFocus={this.props.onFocus ? this.props.onFocus : () => {}}
       >
         {this.props.value}

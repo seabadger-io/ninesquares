@@ -24,6 +24,7 @@
   color: #2a728f;
   flex-basis: 100%;
   padding: 0.5rem;
-  margin: 0;
   box-sizing: border-box;
+  max-width: 800px;
+  margin: 0 auto;
 }

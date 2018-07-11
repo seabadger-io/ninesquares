@@ -1,23 +1,23 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
+import levels from '../../common/levels';
 import classes from './LevelSelect.css';
 
 const levelSelect = (props) => {
-  const levels = [
-    [ 'easy', 'Easy' ],
-    [ 'medium', 'Medium' ],
-    [ 'hard', 'Hard' ],
-    [ 'veryhard', 'Very hard' ]
-  ];
+  const onLevelSelected = (level) => {
+    props.history.push('/list/' + level);
+  }
+
   return (
     <div className={classes.LevelSelect}>
       {
         levels.map(([level, name]) => {
-          return <button key={level} onClick={props.onLevelSelected}>{name}</button>
+          return <button key={level} onClick={() => onLevelSelected(level)}>{name}</button>
         })
       }
     </div>
   );
 };
 
-export default levelSelect;
+export default withRouter(levelSelect);
