@@ -1,3 +1,3 @@
-/* Board actions */
-export const LOAD_BOARDS = 'LOAD_BOARDS';
-export const SET_ACTIVE_BOARD = 'SET_ACTIVE_BOARD';
+/* Puzzle actions */
+export const LOAD_PUZZLES = 'LOAD_PUZZLES';
+export const SET_ACTIVE_PUZZLE = 'SET_ACTIVE_PUZZLE';

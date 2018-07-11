@@ -7,12 +7,12 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import boardReducer from './redux/reducers/board';
+import puzzleReducer from './redux/reducers/puzzle';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :null || compose;
 
 const rootReducer = combineReducers({
-  board: boardReducer
+  puzzle: puzzleReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(

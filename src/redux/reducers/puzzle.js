@@ -2,21 +2,21 @@ import * as actionsDef from '../actions/actionsDef';
 import { updateState } from './utils';
 
 const initialState = {
-  activeBoard: null,
-  lastActiveBoard: null,
-  boards: null
+  activePuzzle: null,
+  lastActivePuzzle: null,
+  puzzles: null
 };
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case actionsDef.LOAD_BOARDS:
+    case actionsDef.LOAD_PUZZLES:
       return updateState(state, {
-        boards: action.boards
+        puzzles: action.puzzles
       });
-    case actionsDef.SET_ACTIVE_BOARD:
-      const updateLast = action.activeBoard === null ? {} : { lastActiveBoard: action.activeBoard };
+    case actionsDef.SET_ACTIVE_PUZZLE:
+      const updateLast = action.activePuzzle === null ? {} : { lastActivePuzzle: action.activePuzzle };
       return updateState(state, {
-        activeBoard: action.activeBoard,
+        activePuzzle: action.activePuzzle,
         ...updateLast
       });
     default:
