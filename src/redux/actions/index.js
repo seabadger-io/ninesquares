@@ -1,3 +1,4 @@
 export {
-  loadPuzzles
+  loadPuzzles,
+  setActivePuzzle
 } from './puzzle';

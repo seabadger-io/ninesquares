@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Redirect, Link } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import classes from './PuzzleList.css';
@@ -50,7 +50,7 @@ class PuzzleList extends Component {
               id: 'puzzle' + idx,
               className: classes.Puzzle
             }}
-            to={'/puzzles/' + level + '/' + idx}
+            to={'/puzzles/' + level + '/play/' + idx}
             onKeyPress={(event) => { this.navigationHandler(event, idx) }}
           >
             <div className={classes.Preview}><Board puzzle={puzzle} preview /></div>
