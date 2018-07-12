@@ -4,14 +4,13 @@ import { Route, Switch } from 'react-router-dom';
 import Board from './components/Board/Board';
 import LevelSelect from './components/LevelSelect/LevelSelect';
 import PuzzleList from './components/PuzzleList/PuzzleList';
+import Header from './components/Header/Header';
 
 class App extends Component {
   render() {
     return (
       <div className={classes.App}>
-        <header className={classes.Header}>
-          <h1>Ninesquares</h1>
-        </header>
+        <Header />
         <main className={classes.Main}>
           <Switch>
             <Route path='/' exact component={LevelSelect} />

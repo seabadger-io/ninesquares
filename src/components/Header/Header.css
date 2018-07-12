@@ -1,0 +1,15 @@
+.Header {
+  background-color: #2a728f;
+  color: #fff;
+  flex-basis: 100%;
+  padding: 0.5rem;
+  margin: 0;
+  box-sizing: border-box;
+  height: 3rem;
+}
+
+.Header h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin: 0;
+}

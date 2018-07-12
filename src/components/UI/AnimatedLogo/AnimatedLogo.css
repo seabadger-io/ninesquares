@@ -1,0 +1,65 @@
+.AnimatedLogo {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.Tile {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  float: left;
+  border: 1px solid #2a728f;
+  padding: 0;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  animation-name: TileFrames;
+  animation-duration: 9s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes TileFrames {
+  0% {
+    left: 0;
+    top: 0;
+  }
+  20% {
+    left: 20px;
+    top: 0;
+    background-color: #2a728f;
+  }
+  30% {
+    left: 20px;
+    top: 10px;
+  }
+  50% {
+    left: 0;
+    top: 10px;
+    background-color: #fff;
+    transform: rotate(180deg);
+  }
+  60% {
+    left: 0;
+    top: 20px;
+  }
+  80% {
+    left: 20px;
+    top: 20px;
+    background-color: #2a728f;
+  }
+  90% {
+    top: 10px;
+    left: 10px;
+  }
+  100% {
+    left: 0;
+    top: 0;
+    background-color: #fff;
+  }
+}
