@@ -20,6 +20,7 @@
   box-shadow: 0 2px 4px #2a728f;
   color: #2a728f;
   background-color: #fff;
+  transition: border 0.2s ease-out;
 }
 
 .Puzzle:focus {
