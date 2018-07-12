@@ -15,7 +15,7 @@ class App extends Component {
         <main className={classes.Main}>
           <Switch>
             <Route path='/' exact component={LevelSelect} />
-            <Route path='/list/:level' component={PuzzleList} />
+            <Route path='/puzzles/:level' component={PuzzleList} />
           </Switch>
         </main>
       </div>

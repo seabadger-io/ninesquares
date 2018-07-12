@@ -6,7 +6,7 @@ import classes from './LevelSelect.css';
 
 const levelSelect = (props) => {
   const onLevelSelected = (level) => {
-    props.history.push('/list/' + level);
+    props.history.push('/puzzles/' + level);
   }
 
   return (

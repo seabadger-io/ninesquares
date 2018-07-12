@@ -22,6 +22,11 @@
   background-color: #fff;
 }
 
+.Puzzle:focus {
+  outline: none;
+  border: 2px ridge #2a728f;
+}
+
 .Puzzle .Preview {
   width: 150px;
   margin-right: 10px;
