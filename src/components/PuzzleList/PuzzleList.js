@@ -3,7 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import classes from './PuzzleList.css';
-import levels from '../../common/levels';
+import { getLevelName } from '../../common/levels';
 import * as actions from '../../redux/actions';
 import Spinner from '../UI/Spinner/Spinner';
 import Board from '../Board/Board';
@@ -64,9 +64,7 @@ class PuzzleList extends Component {
         </div>
       );
     }
-    const levelName = levels.filter(([lid, ]) => {
-      return lid === level;
-    })[0][1];
+    const levelName = getLevelName(level);
     return (
       <div className={classes.PuzzleList}>
         <h2>{levelName} puzzles</h2>

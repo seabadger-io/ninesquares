@@ -65,6 +65,7 @@ class Play extends Component {
                 time={this.state.time}
                 paused={this.state.paused}
                 onTogglePause={this.onTogglePause}
+                activePuzzle={this.props.activePuzzle}
               />
               <Board
                 puzzle={this.props.puzzles[level][idx]}
