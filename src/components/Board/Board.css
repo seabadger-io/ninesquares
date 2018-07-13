@@ -17,6 +17,15 @@
   box-sizing: border-box;
 }
 
+.Line {
+  display: flex;
+  flex-basis: 100%;
+}
+
+.Line:nth-child(3n):not(:nth-child(9n)){
+  border-bottom: 3px solid #000;
+}
+
 .Board.Paused {
   filter: blur(8px);
 }

@@ -74,22 +74,31 @@ class Board extends Component {
     }
     if (this.props.puzzle !== null) {
       const boardArray = this.props.puzzle.split('');
+      const tiles = boardArray.map((tile, idx) => {
+        const newTile = <Tile
+          key={idx}
+          value={tile > 0 ? tile : ' '}
+          isFixed={tile !== '0'}
+          getRef={ref => this.tileRefs[idx] = ref}
+          onFocus={() => { this.onTileFocus(idx); }}
+          preview={this.props.preview || this.props.paused}
+        />
+        return newTile;
+      });
+      const lines = [];
+      for (let i=0; i < 9; i++) {
+        lines.push((
+          <div className={classes.Line}>
+            {tiles.slice(i * 9, (i * 9) + 9)}
+          </div>
+        ));
+      }
       board = (
         <div
           className={activeClasses.join(' ')}
           onBlur={this.onFocusLeftBoard}
         >
-          {boardArray.map((tile, idx) => {
-            const newTile = <Tile
-              key={idx}
-              value={tile > 0 ? tile : ' '}
-              isFixed={tile !== '0'}
-              getRef={ref => this.tileRefs[idx] = ref}
-              onFocus={() => { this.onTileFocus(idx); }}
-              preview={this.props.preview || this.props.paused}
-            />
-            return newTile;
-          })}
+          {lines}
         </div>
       );
     }
