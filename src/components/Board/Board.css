@@ -26,6 +26,10 @@
   border-bottom: 3px solid #000;
 }
 
+.Preview .Line:nth-child(3n):not(:nth-child(9n)){
+  border-bottom: 1px dashed #000;
+}
+
 .Board.Paused {
   filter: blur(8px);
 }
