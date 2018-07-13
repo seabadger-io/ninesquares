@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import App from './App';
 import './index.css';
-import puzzleReducer from './redux/reducers/puzzle';
-import userReducer from './redux/reducers/user';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import puzzleReducer from './redux/reducers/puzzle';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
 
 const rootReducer = combineReducers({
-  puzzle: puzzleReducer,
-  user: userReducer
+  puzzle: puzzleReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
