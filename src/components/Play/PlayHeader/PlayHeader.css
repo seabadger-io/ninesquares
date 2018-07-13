@@ -1,0 +1,6 @@
+.PlayHeader {
+  display: flex;
+  flex-flow: row;
+  padding: 5px;
+  margin: 5px 0;
+}
