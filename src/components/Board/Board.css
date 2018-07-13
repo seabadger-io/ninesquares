@@ -11,13 +11,28 @@
   max-width: 800px;
   display: flex;
   flex-flow: row wrap;
-  border: 3px solid #000;
+  border: 5px ridge #2a728f;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
 }
 
+.Board.Paused {
+  filter: blur(8px);
+}
+
 .Board.Preview {
   min-width: 100px;
   border: 5px ridge #2a728f;
+}
+
+.PausedBox {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  filter: none;
+  margin-top: -50%;
+  z-index: 10;
 }

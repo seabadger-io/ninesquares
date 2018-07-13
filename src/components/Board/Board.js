@@ -69,6 +69,9 @@ class Board extends Component {
     if (this.props.preview) {
       activeClasses.push(classes.Preview);
     }
+    if (this.props.paused) {
+      activeClasses.push(classes.Paused);
+    }
     if (this.props.puzzle !== null) {
       const boardArray = this.props.puzzle.split('');
       board = (
@@ -83,7 +86,7 @@ class Board extends Component {
               isFixed={tile !== '0'}
               getRef={ref => this.tileRefs[idx] = ref}
               onFocus={() => { this.onTileFocus(idx); }}
-              preview={this.props.preview}
+              preview={this.props.preview || this.props.paused}
             />
             return newTile;
           })}
@@ -93,6 +96,7 @@ class Board extends Component {
     return (
       <div className={classes.GridRoot}>
         {board}
+        {this.props.paused ? <div className={classes.PausedBox}>Paused</div> : null}
       </div>
     );
   }

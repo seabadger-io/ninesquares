@@ -10,7 +10,8 @@ import PlayHeader from './PlayHeader/PlayHeader';
 
 class Play extends Component {
   state = {
-    time: 0
+    time: 0,
+    paused: true
   }
 
   componentDidMount() {
@@ -30,15 +31,21 @@ class Play extends Component {
       this.savedPuzzle = savedState.puzzle;
       this.setState({ time: savedState.time });
     }
+    this.setState({ paused: false });
     window.setInterval(this.updateTime, 1000);
   }
 
   updateTime = () => {
-    if (!this.props.loading && this.props.puzzles !== null) {
+    if (!this.props.loading && this.props.puzzles !== null &&
+    !this.state.paused) {
       window.requestAnimationFrame(() => {
         this.setState({ time: new Date().getTime() / 1000 - this.startTime });
       })
     }
+  }
+
+  onTogglePause = () => {
+    this.setState({ paused: !this.state.paused });
   }
 
   componentWillUnmount() {
@@ -54,10 +61,15 @@ class Play extends Component {
         this.props.puzzles[level][idx]) {
           content = (
             <Aux>
-              <PlayHeader time={this.state.time} />
+              <PlayHeader
+                time={this.state.time}
+                paused={this.state.paused}
+                onTogglePause={this.onTogglePause}
+              />
               <Board
                 puzzle={this.props.puzzles[level][idx]}
                 savedPuzzle={this.savedPuzzle}
+                paused={this.state.paused}
               />
             </Aux>
           );

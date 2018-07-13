@@ -6,7 +6,11 @@ import TimeDisplay from './TimeDisplay/TimeDisplay';
 const playHeader = (props) => {
   return (
     <div className={classes.PlayHeader}>
-      <TimeDisplay time={props.time} />
+      <TimeDisplay
+        time={props.time}
+        paused={props.paused}
+        onTogglePause={props.onTogglePause}
+      />
     </div>
   );
 };
