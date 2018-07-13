@@ -8,11 +8,13 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import puzzleReducer from './redux/reducers/puzzle';
+import userReducer from './redux/reducers/user';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
 
 const rootReducer = combineReducers({
-  puzzle: puzzleReducer
+  puzzle: puzzleReducer,
+  user: userReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
