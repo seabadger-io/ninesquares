@@ -96,7 +96,7 @@ class Board extends Component {
     return (
       <div className={classes.GridRoot}>
         {board}
-        {this.props.paused ? <div className={classes.PausedBox}>Paused</div> : null}
+        {this.props.paused ? <div className={classes.PausedBox}><span className={classes.PauseText}>▮▮</span></div> : null}
       </div>
     );
   }

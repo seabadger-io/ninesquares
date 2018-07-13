@@ -30,9 +30,37 @@
   position: relative;
   width: 100%;
   text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
-  filter: none;
   margin-top: -50%;
   z-index: 10;
+}
+
+.PausedBox .PauseText {
+  font-size: 3rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #e5f4fa;
+  display: inline-block;
+  line-height: 5rem;
+  padding: 0;
+  border: 1px solid #2a728f;
+  box-shadow: 0 0 5px #000;
+  animation-name: PauseTextFrames;
+  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes PauseTextFrames {
+  0% {
+  }
+
+  50% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
 }
