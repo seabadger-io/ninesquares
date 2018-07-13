@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import LevelSelect from './components/LevelSelect/LevelSelect';
 import PuzzleList from './components/PuzzleList/PuzzleList';
 import Header from './components/Header/Header';
+import Play from './components/Play/Play';
 
 class App extends Component {
   render() {
@@ -13,7 +14,7 @@ class App extends Component {
         <main className={classes.Main}>
           <Switch>
             <Route path='/' exact component={LevelSelect} />
-            <Route path='/puzzles/:level/play/:idx' />
+            <Route path='/puzzles/:level/play/:idx' component={Play} />
             <Route path='/puzzles/:level' component={PuzzleList} />
           </Switch>
         </main>

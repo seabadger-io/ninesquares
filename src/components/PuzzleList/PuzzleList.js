@@ -38,7 +38,7 @@ class PuzzleList extends Component {
     let content = <Spinner />;
     if (this.props.error && this.props.puzzles === null) {
       content = (
-        <div className={classes.Error}>Sorry! Could not load puzzles ({this.props.error.code})</div>
+        <div className={classes.Error}>Sorry! Could not load puzzles [{this.props.error.code}]</div>
       );
     }
     if (this.props.puzzles !== null) {
