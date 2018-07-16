@@ -27,6 +27,11 @@
   border-right: 1px dashed #000;
 }
 
-.Tile.Preview {
+.Tile.Preview,
+.Tile.Paused {
   cursor: default;
+}
+
+.Rotate {
+  transform: rotate(45deg);
 }

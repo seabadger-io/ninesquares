@@ -34,14 +34,21 @@ class Tile extends Component {
     if (this.props.preview) {
       activeClasses.push(classes.Preview);
     }
+    let displayValue = this.props.value;
+    if (this.props.paused) {
+      displayValue=Math.ceil(Math.random() * 9);
+      activeClasses.push(classes.Paused);
+      if (Math.random() > 0.8) activeClasses.push(classes.Rotate);
+    }
+
     return (
       <button
         ref={this.tileRef}
         className={activeClasses.join(' ')}
-        disabled={this.props.isFixed || this.props.preview}
+        disabled={this.props.isFixed || this.props.preview || this.props.paused}
         onFocus={this.props.onFocus ? this.props.onFocus : () => {}}
       >
-        {this.props.value}
+        {displayValue}
       </button>
     );
   }

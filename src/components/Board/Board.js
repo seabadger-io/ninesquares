@@ -82,7 +82,8 @@ class Board extends Component {
           isFixed={tile !== '0'}
           getRef={ref => this.tileRefs[idx] = ref}
           onFocus={() => { this.onTileFocus(idx); }}
-          preview={this.props.preview || this.props.paused}
+          preview={this.props.preview}
+          paused={this.props.paused}
         />
         return newTile;
       });
