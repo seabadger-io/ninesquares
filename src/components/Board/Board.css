@@ -31,7 +31,7 @@
 }
 
 .Board.Paused {
-  filter: blur(8px);
+  filter: blur(18px);
 }
 
 .Board.Preview {
