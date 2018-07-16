@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Icon from '../UI/Icon/Icon';
 import Tile from './Tile/Tile';
 import classes from './Board.css';
 
@@ -105,7 +106,7 @@ class Board extends Component {
     return (
       <div className={classes.GridRoot}>
         {board}
-        {this.props.paused ? <div className={classes.PausedBox}><span className={classes.PauseText}>▮▮</span></div> : null}
+        {this.props.paused ? <div className={classes.PausedBox}><span className={classes.PauseText}><Icon icon="pause" /></span></div> : null}
       </div>
     );
   }

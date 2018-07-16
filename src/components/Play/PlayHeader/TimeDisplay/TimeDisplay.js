@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Icon from '../../../UI/Icon/Icon';
 import classes from './TimeDisplay.css';
 
 const timeDisplay = (props) => {
@@ -14,7 +15,8 @@ const timeDisplay = (props) => {
         className={classes.PlayPause}
         onClick={props.onTogglePause ? props.onTogglePause : () => {}}
       >
-      {props.paused ? '▶' : '▮▮'}
+      {props.paused ? <Icon icon="play" label="Continue playing"/>
+      : <Icon icon="pause" label="Pause game" />}
       </button>
     </div>
   );
