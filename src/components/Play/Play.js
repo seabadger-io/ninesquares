@@ -10,6 +10,7 @@ import PlayHeader from './PlayHeader/PlayHeader';
 
 class Play extends Component {
   state = {
+    savedTime: 0,
     time: 0,
     paused: true
   }
@@ -45,7 +46,18 @@ class Play extends Component {
   }
 
   onTogglePause = () => {
-    this.setState({ paused: !this.state.paused });
+    this.setState({ paused: !this.state.paused }, () => {
+      if (this.state.paused) {
+        const time = this.state.time;
+        const savedTime = this.state.savedTime;
+        this.setState({
+          time: 0,
+          savedTime: savedTime + time
+        })
+      } else {
+        this.startTime = new Date().getTime() / 1000;
+      }
+    });
   }
 
   componentWillUnmount() {
@@ -62,7 +74,7 @@ class Play extends Component {
           content = (
             <Aux>
               <PlayHeader
-                time={this.state.time}
+                time={this.state.time + this.state.savedTime}
                 paused={this.state.paused}
                 onTogglePause={this.onTogglePause}
                 activePuzzle={this.props.activePuzzle}
