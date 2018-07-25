@@ -1,0 +1,46 @@
+.Numpad {
+  display: flex;
+  flex-flow: row wrap;
+  top: calc(50vh - 100px);
+  width: 180px;
+  z-index: 10;
+  box-sizing: border-box;
+  text-align: center;
+  position: absolute;
+  left: calc(50% - 90px);
+  border: 5px ridge #2a728f;
+  opacity: 0.9;
+}
+
+.Button {
+  flex-basis: 33%;
+  flex-grow: 1;
+  height: 60px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 50px;
+  color: #fff;
+  background-color: #2a728f;
+}
+
+.Button:focus {
+  outline: none;
+  border: 4px solid #2a728f;
+  background-color: #fff;
+  color: #2a728f;
+}
+
+.CtrlButton {
+  flex-basis: 100%;
+  flex-grow: 1;
+  height: 25px;
+  font-size: 18px;
+  text-align: center;
+  background-color: #2a728f;
+  color: #ffe9bf;
+}
+
+.CtrlButton:focus {
+  background-color: #fff;
+  color: #2a728f;
+}

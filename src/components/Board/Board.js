@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 
 import Icon from '../UI/Icon/Icon';
 import Tile from './Tile/Tile';
+import Numpad from './Numpad/Numpad';
 import classes from './Board.css';
 
 class Board extends Component {
   tileRefs = {}
+
+  state = {
+    tileSelected: null,
+    setTiles: {}
+  }
 
   resizeTiles = () => {
     let width = null;
@@ -46,6 +52,25 @@ class Board extends Component {
     });
   }
 
+  tileClicked = (idx) => {
+    this.setState({ tileSelected: idx });
+  }
+
+  numpadCloseHandler = (idx, key) => {
+    const update = { tileSelected: null };
+    if (key) {
+      const setTiles = {...this.state.setTiles};
+      if (key !== 'reset') {
+        setTiles[idx] = key;
+      } else {
+        delete setTiles[idx];
+      }
+      update.setTiles = setTiles;
+    }
+    this.setState(update);
+    this.tileRefs[idx].tileRef.current.focus();
+  }
+
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.resizeListener);
     this.resizeListener = null;
@@ -62,6 +87,9 @@ class Board extends Component {
     if (prevProps.puzzle !== this.props.puzzle) {
       this.resizeTiles();
     }
+    if (!prevProps.paused && this.props.paused) {
+      this.setState({ tileSelected: null });
+    }
   }
 
   render() {
@@ -76,21 +104,24 @@ class Board extends Component {
     if (this.props.puzzle !== null) {
       const boardArray = this.props.puzzle.split('');
       const tiles = boardArray.map((tile, idx) => {
+        const value = this.state.setTiles[idx] ?
+        this.state.setTiles[idx] : tile > 0 ? tile : ' ';
         const newTile = <Tile
           key={idx}
-          value={tile > 0 ? tile : ' '}
+          value={value}
           isFixed={tile !== '0'}
           getRef={ref => this.tileRefs[idx] = ref}
           onFocus={() => { this.onTileFocus(idx); }}
           preview={this.props.preview}
           paused={this.props.paused}
+          onClick={() => {this.tileClicked(idx)}}
         />
         return newTile;
       });
       const lines = [];
       for (let i=0; i < 9; i++) {
         lines.push((
-          <div className={classes.Line}>
+          <div className={classes.Line} key={'line_' + i}>
             {tiles.slice(i * 9, (i * 9) + 9)}
           </div>
         ));
@@ -108,6 +139,11 @@ class Board extends Component {
       <div className={classes.GridRoot}>
         {board}
         {this.props.paused ? <div className={classes.PausedBox}><span className={classes.PauseText}><Icon icon="pause" /></span></div> : null}
+        {this.state.tileSelected !== null
+          ? <Numpad
+              onClose={(key) => this.numpadCloseHandler(this.state.tileSelected, key)}
+              current={this.state.setTiles[this.state.tileSelected] || null} />
+          : null}
       </div>
     );
   }

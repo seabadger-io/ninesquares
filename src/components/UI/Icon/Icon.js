@@ -12,7 +12,7 @@ export default (props) => {
   return (
     <Aux>
       <i className={[fa, icon, ...iconClasses].join(' ')} aria-hidden></i>
-      {props.label ? <span class={classes.srOnly}>{props.label}:</span> : null}
+      {props.label ? <span className={classes.srOnly}>{props.label}:</span> : null}
     </Aux>
   );
 }

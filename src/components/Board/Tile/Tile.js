@@ -47,6 +47,7 @@ class Tile extends Component {
         className={activeClasses.join(' ')}
         disabled={this.props.isFixed || this.props.preview || this.props.paused}
         onFocus={this.props.onFocus ? this.props.onFocus : () => {}}
+        onClick={this.props.onClick ? this.props.onClick: () => {}}
       >
         {displayValue}
       </button>
