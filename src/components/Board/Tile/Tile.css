@@ -10,13 +10,17 @@
   padding: 0;
 }
 
+.Tile:focus {
+  outline: 3px ridge rgb(178, 226, 255, 0.9);
+}
+
 .Disabled {
   background-color: #ccc;
   cursor: default;
 }
 
 .ActiveLine {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,255,0.05);
 }
 
 .Tile:nth-child(3n):not(:nth-child(9n)){
