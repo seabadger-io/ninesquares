@@ -12,6 +12,7 @@
 
 .Tile:focus {
   outline: 3px ridge rgb(178, 226, 255, 0.9);
+  z-index: 10;
 }
 
 .Disabled {
