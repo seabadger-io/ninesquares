@@ -41,6 +41,7 @@ class PuzzleList extends Component {
         <div className={classes.Error}>Sorry! Could not load puzzles [{this.props.error.code}]</div>
       );
     }
+    const levelName = getLevelName(level);
     if (this.props.puzzles !== null) {
       const list = this.props.puzzles[level].map((puzzle, idx) => {
         return (
@@ -54,7 +55,7 @@ class PuzzleList extends Component {
             onKeyPress={(event) => { this.navigationHandler(event, idx) }}
           >
             <div className={classes.Preview}><Board puzzle={puzzle} preview /></div>
-            <div className={classes.Details}>details here later</div>
+            <div className={classes.Details}>{levelName} puzzle #{idx}</div>
           </ButtonPanel>
         );
       });
@@ -64,7 +65,7 @@ class PuzzleList extends Component {
         </div>
       );
     }
-    const levelName = getLevelName(level);
+    
     return (
       <div className={classes.PuzzleList}>
         <h2>{levelName} puzzles</h2>
