@@ -10,7 +10,8 @@ class Board extends Component {
 
   state = {
     tileSelected: null,
-    setTiles: {}
+    setTiles: {},
+    invalidTiles: {}
   }
 
   resizeTiles = () => {
@@ -61,12 +62,14 @@ class Board extends Component {
     if (key) {
       const setTiles = {...this.state.setTiles};
       if (key !== 'reset') {
-        setTiles[idx] = key;
+        setTiles[idx] = key.toString();
       } else {
         delete setTiles[idx];
       }
       update.setTiles = setTiles;
     }
+    const validation = this.props.onUpdate(update.setTiles || this.state.setTiles);
+    update.invalidTiles = {...validation.invalidTiles};
     this.setState(update);
     this.tileRefs[idx].tileRef.current.focus();
   }
@@ -115,6 +118,7 @@ class Board extends Component {
           preview={this.props.preview}
           paused={this.props.paused}
           onClick={() => {this.tileClicked(idx)}}
+          isInvalid={this.state.invalidTiles[idx] || false}
         />
         return newTile;
       });

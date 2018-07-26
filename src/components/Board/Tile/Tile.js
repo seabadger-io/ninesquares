@@ -34,6 +34,9 @@ class Tile extends Component {
     if (this.props.preview) {
       activeClasses.push(classes.Preview);
     }
+    if (this.props.isInvalid) {
+      activeClasses.push(classes.Invalid);
+    }
     let displayValue = this.props.value;
     if (this.props.paused) {
       displayValue=Math.ceil(Math.random() * 9);

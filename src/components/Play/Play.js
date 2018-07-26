@@ -33,7 +33,7 @@ class Play extends Component {
       this.setState({ time: savedState.time });
     }
     this.setState({ paused: false });
-    window.setInterval(this.updateTime, 1000);
+    this.timer = window.setInterval(this.updateTime, 1000);
   }
 
   updateTime = () => {
@@ -43,6 +43,59 @@ class Play extends Component {
         this.setState({ time: new Date().getTime() / 1000 - this.startTime });
       })
     }
+  }
+
+  checkBoard = (savedState) => {
+    const {level, idx} = {...this.props.activePuzzle};
+    const board = this.props.puzzles[level][idx].split('');
+    const completeBoard = board.map((value, idx) => {
+      if (savedState[idx]) {
+        return savedState[idx];
+      } else {
+        return value;
+      }
+    });
+    const response = {
+      valid: true,
+      complete: true,
+      invalidTiles: {}
+    };
+    const setInvalid = (idx, opponent) => {
+      response.invalidTiles[idx] = true;
+      response.invalidTiles[opponent] = true;
+      response.valid = false;
+    };
+    Object.keys(savedState).map(k => parseInt(k, 0)).forEach((idx) => {
+      const value = savedState[idx];
+      if (value === 0) {
+        response.complete = false;
+      }
+      if (!response.invalidTiles[idx] && value !== '0') {
+        const xBase = Math.floor(idx % 9);
+        const yBase = Math.floor(idx / 9);
+        for (let i = 0; i < 9; i++) {
+          const xC = xBase + (9 * i);
+          if (idx !== xC && completeBoard[xC] === value) {
+            setInvalid(idx, xC);
+          }
+          const yC = yBase * 9 + i;
+          if (idx !== yC && completeBoard[yC] === value) {
+            setInvalid(idx, yC);
+          }
+        }
+        const boxX = Math.floor(xBase / 3) * 3;
+        const boxY = Math.floor(yBase / 3) * 3;
+        for (let y = 0; y < 3; y++) {
+          for (let x = 0; x < 3; x++) {
+            const bC = boxX + x + (boxY + y) * 9;
+            if (idx !== bC && completeBoard[bC] === value) {
+              setInvalid(idx, bC);
+            }
+          }
+        }
+      }
+    });
+    return response;
   }
 
   onTogglePause = () => {
@@ -62,6 +115,7 @@ class Play extends Component {
 
   componentWillUnmount() {
     this.props.setActivePuzzle(null);
+    window.clearInterval(this.timer);
   }
 
   render() {
@@ -83,6 +137,7 @@ class Play extends Component {
                 puzzle={this.props.puzzles[level][idx]}
                 savedPuzzle={this.savedPuzzle}
                 paused={this.state.paused}
+                onUpdate={this.checkBoard}
               />
             </Aux>
           );

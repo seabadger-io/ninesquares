@@ -35,3 +35,7 @@
 .Rotate {
   transform: rotate(45deg);
 }
+
+.Invalid {
+  color: #be5151;
+}
