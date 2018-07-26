@@ -10,6 +10,7 @@ class Board extends Component {
 
   state = {
     tileSelected: null,
+    tileFocused: null,
     setTiles: {},
     invalidTiles: {}
   }
@@ -51,6 +52,7 @@ class Board extends Component {
         }
       }
     });
+    this.setState({ tileFocused: activeIdx });
   }
 
   tileClicked = (idx) => {
@@ -74,6 +76,52 @@ class Board extends Component {
     this.tileRefs[idx].tileRef.current.focus();
   }
 
+  keyDownHandler = (event) => {
+    let currentButton = 40;
+    if (this.state.tileFocused !== null) {
+      currentButton = this.state.tileFocused;
+    }
+    switch(event.key) {
+      case 'ArrowLeft':
+        while (currentButton > 1 && this.tileRefs[currentButton - 1].tileRef.current.disabled) {
+          currentButton = currentButton - 1;
+        }
+        if (currentButton > 1) {
+          this.tileRefs[currentButton - 1].tileRef.current.focus();
+        }
+        event.preventDefault();
+        break;
+      case 'ArrowRight':
+        while (currentButton < 80 && this.tileRefs[currentButton + 1].tileRef.current.disabled) {
+          currentButton = currentButton + 1;
+        }
+        if (currentButton < 80) {
+          this.tileRefs[currentButton + 1].tileRef.current.focus();
+        }
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        while (currentButton > 8 && this.tileRefs[currentButton - 9].tileRef.current.disabled) {
+          currentButton = currentButton - 9;
+        }
+        if (currentButton > 8) {
+          this.tileRefs[currentButton - 9].tileRef.current.focus();
+        }
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        while (currentButton < 71 && this.tileRefs[currentButton + 9].tileRef.current.disabled) {
+          currentButton = currentButton + 9;
+        }
+        if (currentButton < 71) {
+          this.tileRefs[currentButton + 9].tileRef.current.focus();
+        }
+        event.preventDefault();
+        break;
+      default:
+    }
+  }
+
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.resizeListener);
     this.resizeListener = null;
@@ -84,6 +132,13 @@ class Board extends Component {
       this.resizeTiles();
     });
     this.resizeTiles();
+    if (!this.props.preview) {
+      let focused = 0;
+      while (this.tileRefs[focused].tileRef.current.disabled) {
+        focused++;
+      }
+      this.tileRefs[focused].tileRef.current.focus();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -134,6 +189,7 @@ class Board extends Component {
         <div
           className={activeClasses.join(' ')}
           onBlur={this.onFocusLeftBoard}
+          onKeyDown={this.keyDownHandler}
         >
           {lines}
         </div>
