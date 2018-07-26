@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Backdrop from '../../UI/Backdrop/Backdrop';
 import classes from './Numpad.css';
 
 class Numpad extends Component {
@@ -86,6 +86,7 @@ class Numpad extends Component {
           onFocus={() => { this.currentButton = 'reset' }}
           ref={(btn) => {this.buttonRefs['reset'] = btn}}
         >Reset</button>
+        <Backdrop onClick={() => this.props.onClose()} />
       </div>
     );
   }
