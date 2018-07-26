@@ -1,18 +1,32 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
+import { getLevelName } from '../../../common/levels';
+import Icon from '../../UI/Icon/Icon';
 import classes from './PlayHeader.css';
-import TimeDisplay from './TimeDisplay/TimeDisplay';
-import PlayNavigation from './PlayNavigation/PlayNavigation';
 
 const playHeader = (props) => {
+  let minutes = Math.floor(props.time / 60);
+  let seconds = Math.floor(props.time % 60);
+  if (minutes < 10) minutes = '0' + minutes;
+  if (seconds < 10) seconds = '0' + seconds;
   return (
     <div className={classes.PlayHeader}>
-      <PlayNavigation activePuzzle={props.activePuzzle} />
-      <TimeDisplay
-        time={props.time}
-        paused={props.paused}
-        onTogglePause={props.onTogglePause}
-      />
+      <div className={classes.Level}>
+        <Link to={'/puzzles/' + props.activePuzzle.level}>
+          {getLevelName(props.activePuzzle.level)} puzzles
+        </Link>
+        <span className={classes.PuzzleId}>&nbsp;#{props.activePuzzle.idx}</span>
+      </div>
+      <div className={classes.TimeDisplay}>
+        <span className={classes.Time}>{minutes}:{seconds}</span>
+        <button
+          className={classes.PlayPause}
+          onClick={props.onTogglePause ? props.onTogglePause : () => {}}
+        >
+        {props.paused ? <Icon icon="play" label="Continue playing"/>
+        : <Icon icon="pause" label="Pause game" />}
+        </button>
+      </div>
     </div>
   );
 };

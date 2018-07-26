@@ -1,7 +1,43 @@
 .PlayHeader {
   display: flex;
-  flex-flow: row;
-  padding: 5px;
-  margin: 5px 0;
+  flex-basis: 20%;
+  font-size: 1.2rem;
+  border-radius: 10%;
+  padding: 5px 10%;
+  box-shadow: 2px 2px 5px #2a728f;
   justify-content: space-around;
+  line-height: 1.4rem;
+  margin: 5px auto;
+}
+
+.Time {
+  padding: 3px;
+}
+
+.PlayPause {
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  border: none;
+  background-color: #e5f4fa;
+  color: #2a728f;
+  transition: all 0.3s ease-out;
+  outline: none;
+}
+
+.PlayPause:focus,
+.PlayPause:hover {
+  box-shadow: 2px 2px 4px #2a728f;
+}
+
+.PlayPause:active {
+  background-color: #2a728f;
+  color: #fff;
+}
+
+.Level a,
+.Level a:visited {
+  text-decoration: none;
+  color: #2a728f;
 }
