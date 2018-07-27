@@ -7,26 +7,12 @@ import { getLevelName } from '../../common/levels';
 import * as actions from '../../redux/actions';
 import Spinner from '../UI/Spinner/Spinner';
 import Board from '../Board/Board';
-import ButtonPanel from '../UI/ButtonPanel/ButtonPanel';
 
 class PuzzleList extends Component {
 
   componentWillMount() {
     if (this.props.puzzles === null && !this.props.loading) {
       this.props.loadPuzzles();
-    }
-  }
-
-  navigationHandler = (event, idx) => {
-    let nextIdx = idx;
-    switch(event.key) {
-      case "ArrowUp": nextIdx--; break;
-      case "ArrowDown": nextIdx++; break;
-      default:
-    }
-    const el = document.getElementById('puzzle' + nextIdx);
-    if (el) {
-      el.focus();
     }
   }
   
@@ -45,18 +31,19 @@ class PuzzleList extends Component {
     if (this.props.puzzles !== null) {
       const list = this.props.puzzles[level].map((puzzle, idx) => {
         return (
-          <ButtonPanel
-            key={idx}
-            attrs={{
-              id: 'puzzle' + idx,
-              className: classes.Puzzle
-            }}
-            to={'/puzzles/' + level + '/play/' + idx}
-            onKeyPress={(event) => { this.navigationHandler(event, idx) }}
-          >
-            <div className={classes.Preview}><Board puzzle={puzzle} preview /></div>
-            <div className={classes.Details}>{levelName} puzzle #{idx}</div>
-          </ButtonPanel>
+          <div className={classes.Puzzle} key={idx}>
+              <div className={classes.Preview}><Board puzzle={puzzle} preview /></div>
+              <div className={classes.DetailsContainer}>
+              <label for={'PlayButton_' + idx} className={classes.Details}>
+                {levelName} puzzle #{idx}
+              </label>
+              <button
+                className={classes.PlayButton}
+                onClick={() => this.props.history.push('/puzzles/' + level + '/play/' + idx)}
+                id={'PlayButton_' + idx}
+              >Play</button>
+              </div>
+          </div>
         );
       });
       content = (

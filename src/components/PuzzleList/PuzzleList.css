@@ -12,6 +12,7 @@
 }
 
 .Puzzle {
+  display: flex;
   text-decoration: none;
   width: calc(100% - 20px);
   padding: 8px;
@@ -28,12 +29,35 @@
   border: 2px ridge #2a728f;
 }
 
-.Puzzle .Preview {
+.Preview {
   width: 150px;
   margin-right: 10px;
   display: inline-block;
 }
 
-.Puzzle .Details {
-  display: inline-block;
+.DetailsContainer {
+  display: flex;
+  flex-flow: column;
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.Details {
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.PlayButton {
+  flex-basis: 3rem;
+  font-size: 1.5rem;
+  background-color: #2a728f;
+  color: #fff;
+  border: none;
+  box-shadow: 2px 2px 5px #2a728f;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.PlayButton:focus {
+  outline: 4px solid rgb(178, 226, 255, 0.6);
 }
