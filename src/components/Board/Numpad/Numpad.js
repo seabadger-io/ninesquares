@@ -22,7 +22,7 @@ class Numpad extends Component {
   }
 
   componentDidMount() {
-    const c = this.props.current ? this.props.current : 5;
+    const c = this.props.current ? this.props.current : 'reset';
     this.buttonRefs[c].focus();
   }
 
