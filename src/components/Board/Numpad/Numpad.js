@@ -8,11 +8,18 @@ class Numpad extends Component {
     super();
     this.buttonRefs = {};
     this.currentButton = null;
+  }
+
+  componentWillMount() {
     this.buttons = [...[...Array(9).keys()].map(n => n + 1)].map((n) => {
+      const buttonClasses = [classes.Button];
+      if (this.props.current === n.toString()) {
+        buttonClasses.push(classes.Current);
+      }
       return (
         <button
           key={n}
-          className={classes.Button}
+          className={buttonClasses.join(' ')}
           onClick={() => { this.buttonClickHandler(n); }}
           onFocus={() => { this.currentButton = n }}
           ref={(btn) => {this.buttonRefs[n] = btn}}
