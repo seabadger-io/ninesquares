@@ -9,6 +9,15 @@ const playHeader = (props) => {
   let seconds = Math.floor(props.time % 60);
   if (minutes < 10) minutes = '0' + minutes;
   if (seconds < 10) seconds = '0' + seconds;
+  let button = props.completed ? null : (
+    <button
+      className={classes.PlayPause}
+      onClick={props.onTogglePause ? props.onTogglePause : () => {}}
+    >
+      {props.paused ? <Icon icon="play" label="Continue playing" />
+      : <Icon icon="pause" label="Pause game" />}
+    </button>
+  );
   return (
     <div className={classes.PlayHeader}>
       <div className={classes.Level}>
@@ -19,13 +28,7 @@ const playHeader = (props) => {
       </div>
       <div className={classes.TimeDisplay}>
         <span className={classes.Time}>{minutes}:{seconds}</span>
-        <button
-          className={classes.PlayPause}
-          onClick={props.onTogglePause ? props.onTogglePause : () => {}}
-        >
-        {props.paused ? <Icon icon="play" label="Continue playing"/>
-        : <Icon icon="pause" label="Pause game" />}
-        </button>
+        {button}
       </div>
     </div>
   );

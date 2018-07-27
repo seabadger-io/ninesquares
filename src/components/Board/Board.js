@@ -159,6 +159,9 @@ class Board extends Component {
     if (this.props.paused) {
       activeClasses.push(classes.Paused);
     }
+    if (this.props.completed) {
+      activeClasses.push(classes.Completed);
+    }
     if (this.props.puzzle !== null) {
       const boardArray = this.props.puzzle.split('');
       const tiles = boardArray.map((tile, idx) => {
@@ -172,6 +175,7 @@ class Board extends Component {
           onFocus={() => { this.onTileFocus(idx); }}
           preview={this.props.preview}
           paused={this.props.paused}
+          stopped={this.props.completed}
           onClick={() => {this.tileClicked(idx)}}
           isInvalid={this.state.invalidTiles[idx] || false}
         />

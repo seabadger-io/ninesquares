@@ -33,7 +33,8 @@
 }
 
 .Tile.Preview,
-.Tile.Paused {
+.Tile.Paused,
+.Tile.Stopped {
   cursor: default;
 }
 

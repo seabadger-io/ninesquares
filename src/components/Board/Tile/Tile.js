@@ -37,6 +37,9 @@ class Tile extends Component {
     if (this.props.isInvalid) {
       activeClasses.push(classes.Invalid);
     }
+    if (this.props.stopped) {
+      activeClasses.push(classes.Stopped);
+    }
     let displayValue = this.props.value;
     if (this.props.paused) {
       displayValue=Math.ceil(Math.random() * 9);
@@ -48,7 +51,7 @@ class Tile extends Component {
       <button
         ref={this.tileRef}
         className={activeClasses.join(' ')}
-        disabled={this.props.isFixed || this.props.preview || this.props.paused}
+        disabled={this.props.isFixed || this.props.preview || this.props.paused || this.props.stopped}
         onFocus={this.props.onFocus ? this.props.onFocus : () => {}}
         onClick={this.props.onClick ? this.props.onClick: () => {}}
       >

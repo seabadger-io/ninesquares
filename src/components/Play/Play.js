@@ -12,7 +12,8 @@ class Play extends Component {
   state = {
     savedTime: 0,
     time: 0,
-    paused: true
+    paused: true,
+    completed: false
   }
 
   componentDidMount() {
@@ -38,7 +39,7 @@ class Play extends Component {
 
   updateTime = () => {
     if (!this.props.loading && this.props.puzzles !== null &&
-    !this.state.paused) {
+    !this.state.paused && !this.state.completed) {
       window.requestAnimationFrame(() => {
         this.setState({ time: new Date().getTime() / 1000 - this.startTime });
       })
@@ -57,7 +58,7 @@ class Play extends Component {
     });
     const response = {
       valid: true,
-      complete: true,
+      completed: true,
       invalidTiles: {}
     };
     const setInvalid = (idx, opponent) => {
@@ -67,9 +68,6 @@ class Play extends Component {
     };
     Object.keys(savedState).map(k => parseInt(k, 0)).forEach((idx) => {
       const value = savedState[idx];
-      if (value === 0) {
-        response.complete = false;
-      }
       if (!response.invalidTiles[idx] && value !== '0') {
         const xBase = Math.floor(idx % 9);
         const yBase = Math.floor(idx / 9);
@@ -95,6 +93,13 @@ class Play extends Component {
         }
       }
     });
+    response.completed = completeBoard.filter(v => v === '0').length === 0;
+    console.log(response);
+    console.log(completeBoard.filter(v => v === '0'));
+    if (response.valid && response.completed) {
+      window.clearInterval(this.timer);
+      this.setState({ completed: true });
+    }
     return response;
   }
 
@@ -132,12 +137,14 @@ class Play extends Component {
                 paused={this.state.paused}
                 onTogglePause={this.onTogglePause}
                 activePuzzle={this.props.activePuzzle}
+                completed={this.state.completed}
               />
               <Board
                 puzzle={this.props.puzzles[level][idx]}
                 savedPuzzle={this.savedPuzzle}
                 paused={this.state.paused}
                 onUpdate={this.checkBoard}
+                completed={this.state.completed}
               />
             </Aux>
           );

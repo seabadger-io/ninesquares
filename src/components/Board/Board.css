@@ -76,6 +76,21 @@
   }
 }
 
+.Completed {
+  animation-name: BoardCompletedFrames;
+  animation-duration: 0.5s;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
+}
+
+@keyframes BoardCompletedFrames {
+  50% {
+    transform: scale(0.9);
+    border: 5px ridge #fff;
+  }
+
+}
+
 @media (min-width: 400px) {
   .GridRoot {
     margin-left: auto;
