@@ -45,6 +45,7 @@
 .Details {
   flex-basis: 50%;
   flex-grow: 1;
+  font-weight: bold;
 }
 
 .PlayButton {
