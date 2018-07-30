@@ -34,7 +34,7 @@ class PuzzleList extends Component {
           <div className={classes.Puzzle} key={idx}>
               <div className={classes.Preview}><Board puzzle={puzzle} preview /></div>
               <div className={classes.DetailsContainer}>
-              <label for={'PlayButton_' + idx} className={classes.Details}>
+              <label htmlFor={'PlayButton_' + idx} className={classes.Details}>
                 {levelName} puzzle #{idx}
               </label>
               <button
