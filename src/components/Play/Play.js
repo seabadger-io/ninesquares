@@ -29,29 +29,34 @@ class Play extends Component {
     this.props.savedPuzzles !== null &&
     params.level in this.props.savedPuzzles &&
     params.idx in this.props.savedPuzzles[params.level]) {
-      const savedState = this.props.savedPuzzles[params.level][params.idx];
-      this.savedPuzzle = savedState.puzzle;
-      this.setState({ time: savedState.time });
+      const savedState = { ...this.props.savedPuzzles[params.level][params.idx] };
+      this.savedPuzzle = savedState.savedPuzzle;
+      this.setState({ savedTime: savedState.time, completed: savedState.completed });
     }
     this.setState({ paused: false });
-    this.timer = window.setInterval(this.updateTime, 1000);
+    if (!this.state.completed) {
+      this.timer = window.setInterval(this.updateTime, 1000);
+    }
   }
 
   updateTime = () => {
     if (!this.props.loading && this.props.puzzles !== null &&
     !this.state.paused && !this.state.completed) {
-      window.requestAnimationFrame(() => {
-        this.setState({ time: new Date().getTime() / 1000 - this.startTime });
-      })
+      this.setState({ time: new Date().getTime() / 1000 - this.startTime }, () => {
+        if (this.state.time % 15 === 0) {
+          this.props.savePuzzleState(this.props.activePuzzle, null,
+            this.state.savedTime + this.state.time, this.state.completed);
+        }
+      });
     }
   }
 
-  checkBoard = (savedState) => {
+  checkBoard = (savedPuzzle) => {
     const {level, idx} = {...this.props.activePuzzle};
     const board = this.props.puzzles[level][idx].split('');
     const completeBoard = board.map((value, idx) => {
-      if (savedState[idx]) {
-        return savedState[idx];
+      if (savedPuzzle[idx]) {
+        return savedPuzzle[idx];
       } else {
         return value;
       }
@@ -66,8 +71,8 @@ class Play extends Component {
       response.invalidTiles[opponent] = true;
       response.valid = false;
     };
-    Object.keys(savedState).map(k => parseInt(k, 0)).forEach((idx) => {
-      const value = savedState[idx];
+    Object.keys(savedPuzzle).map(k => parseInt(k, 0)).forEach((idx) => {
+      const value = savedPuzzle[idx];
       if (!response.invalidTiles[idx] && value !== '0') {
         const xBase = Math.floor(idx % 9);
         const yBase = Math.floor(idx / 9);
@@ -94,12 +99,12 @@ class Play extends Component {
       }
     });
     response.completed = completeBoard.filter(v => v === '0').length === 0;
-    console.log(response);
-    console.log(completeBoard.filter(v => v === '0'));
     if (response.valid && response.completed) {
       window.clearInterval(this.timer);
       this.setState({ completed: true });
     }
+    this.props.savePuzzleState(this.props.activePuzzle, savedPuzzle,
+      this.state.savedTime + this.state.time, this.state.completed);
     return response;
   }
 
@@ -121,6 +126,8 @@ class Play extends Component {
   componentWillUnmount() {
     this.props.setActivePuzzle(null);
     window.clearInterval(this.timer);
+    this.props.savePuzzleState(this.props.activePuzzle,
+    null, this.state.savedTime + this.state.time, this.state.completed);
   }
 
   render() {
@@ -185,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setActivePuzzle: (id) => dispatch(actions.setActivePuzzle(id)),
     loadPuzzles: () => dispatch(actions.loadPuzzles()),
-    savePuzzleState: (puzzleId, time, puzzle) => dispatch(actions.savePuzzleState(puzzleId, time, puzzle))
+    savePuzzleState: (puzzle, savedPuzzle, time, completed) => dispatch(actions.savePuzzleState(puzzle, savedPuzzle, time, completed))
   }
 }
 

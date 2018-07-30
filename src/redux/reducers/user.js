@@ -15,14 +15,24 @@ export default (state = initialState, action) => {
 
 const savePuzzleState = (state, action) => {
   let puzzles = {};
-  Object.keys(state.savedPuzzles).forEach((level) => {
-    Object.keys(state.savedPuzzles[level]).forEach((idx) => {
-      puzzles[level][idx] = Object.assign(state.savedPuzzles[level][idx]);
+  if (undefined === puzzles[action.puzzle.level]) {
+    puzzles[action.puzzle.level] = {};
+  }
+  if (null !== state.savedPuzzles) {
+    Object.keys(state.savedPuzzles).forEach((level) => {
+      Object.keys(state.savedPuzzles[level]).forEach((idx) => {
+        puzzles[level][idx] = Object.assign(state.savedPuzzles[level][idx]);
+      });
     });
-  });
-  puzzles[action.puzzleId.level][action.puzzleId.idx] = {
+  }
+  const savedPuzzle = null !== action.savedPuzzle ? { ...action.savedPuzzle }
+    : puzzles[action.puzzle.level][action.puzzle.idx]
+    ? puzzles[action.puzzle.level][action.puzzle.idx].savedPuzzle : {};
+  puzzles[action.puzzle.level][action.puzzle.idx] = {
     time: action.time,
-    puzzle: action.puzzle
+    savedPuzzle: savedPuzzle,
+    completed: action.completed,
+    lastUpdated: new Date().getTime()
   }
   return updateState(state, {
     savedPuzzles: puzzles

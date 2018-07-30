@@ -139,6 +139,10 @@ class Board extends Component {
       }
       this.tileRefs[focused].tileRef.current.focus();
     }
+    if (typeof this.props.savedPuzzle === 'object' &&
+      null !== this.props.savedPuzzle) {
+      this.setState({ setTiles: { ...this.props.savedPuzzle } });
+    }
   }
 
   componentDidUpdate(prevProps) {
